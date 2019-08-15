@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysOneInventoryAPI", "SysOneInventoryAPI\SysOneInventoryAPI.csproj", "{133F4376-F90D-41D5-A780-4F00620EDEEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{133F4376-F90D-41D5-A780-4F00620EDEEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133F4376-F90D-41D5-A780-4F00620EDEEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133F4376-F90D-41D5-A780-4F00620EDEEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133F4376-F90D-41D5-A780-4F00620EDEEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E6CCF45-9BF8-4EF6-B135-24D741B97CF7}
+	EndGlobalSection
+EndGlobal
