@@ -1,0 +1,143 @@
+ng new App --dry-run //dont create actual files and folder just list down the names
+ng new App -d (shorthand)
+ng new App --skip -install //dont' install the npm packages, later use command npm install for the project
+ng new App -si (shorthand)
+code . //to open the solutions in visual studio code through command line
+ng new App --skip-tests //to skip the unit test file while creating the project
+ng new App -st (shorthand)
+ng new App -si -st //skip installing the npm packages and test files both
+ng new AppComponent -it //to get the inline template instead of the html file in Root component
+ng new App --style scss to get the scss style file
+ng new App --prefix pragim //generates new project with pragim as prefix instead as app ex pragim-root (this puts the prefix as pragim in angular-cli.json)
+
+* Angular cli generate component
+ng g c AppComponent (shorthand)// to generate the component 
+ng g c acomp --flat //this generate the angular component inside the src folder along with app.module.ts and other main file (no folder is created for this)
+ng g c abc/acomp --flat // this will generate the component inside the src/abc folder alongwith other component of the abc folder
+ng g c acomp -d // this will dry run the component generation
+ng g c abc/AppComponent //generate component inside the abc folder in src folder
+ng g c acomp --prefix tech //this will create a new component with selector prefix as tech
+ng g c acomp -is //this will generate the component with the inline style 
+ng g c acomp --spec=false //this will not generate the spec file for test in the specified component folder
+ng g c acomp --no-spec
+ng g c ijk --style=scss //this will generate the ijk component with style file as scss.
+
+* Angular cli generate service
+ng generate service serviceName //This will generate the service, this commnad only creates the service file but does not register it with the module 
+				//i.e with providers and it has to be done manually by importing it
+ng g s serviceName // Shorthand Notation 
+//To register the service through cli at the time of creating the service
+ng g s employee-service -m=app.module //by default the spec file will be generated i.e testing file
+ng g s student-service --spec=false -d --flat=false // This will create a dedicated folder for the service inside the student i.e o/p create src/app/student/student.service.ts
+
+* Angular Module
+ng generate module modulename //this command generate the required module, this needs to be manually exported
+			      // to the app module, also this generates a folder of itself with the module name
+ng g m modulename (Shorthand)
+ng g m student -module=app.module // this command generate and register the student module in the app module(root module)
+ng g m student -m=app.module --flat=true //this will place the student module in the app folder itself
+ng g d directive //this generate directive, but this will generate error as it needs specified folder location to be put in.
+ng g d mydirective --skip-import //this will generate the directive mydirective which manully needs to be moved to specified location.
+ng g d mydirective -m=app.module // this will generate the directive and place it to the app.module or the place where ever we want to save it.
+ng g p pipeName // (shortHand) to generate the pipe
+ng g g guardName //(shorthand) to generate the routing guards
+Generating directives, pipes or components, when multiple module exits then use --skip or module name
+ng g d directiveName --skip-import
+ng g d directiveName -module=app.module
+
+ng g cl className // to generate the class
+ng g cl className/folderName --spec=true //to generate the class at some specific folder with spec file
+ng g i interfaceName //to generate the interface
+ng g i interfaceName/folderName //to generate the interface and put the interface at the some specified location(by default the interface name will not have first letter as capital letter that needs to be done manually)
+ng g e folderName/enumtype // to generate the enum and put it in some folderName
+
+*Linting Type(TypeScript)
+ng lint //check for linting error it might give warning if no-use-before-declare is set to true in lint config file
+ng lint --type-check // this avoid the warning of type checking (ex var cannot be used in typescipt file let or const to be used) 
+ng lint // disable no-use-before-declare = false to run it without any warning
+ng lint --fix //to fix the linting error automatically. some of the linting error is fixed by system it self.
+ng lint --format //to format the json,stylish,verbose etc 
+
+*To display the linting error in visual studio code use extension and intall TSLint and reload or restart the window.
+
+How Routing works in Angular
+
+Step 1) Set <base href="/"> in index.html.
+Step 2) Import the RouterModule into the application root module AppModule
+Step 3) Configure the application routes, in app.moudle.ts 
+	ex : const appRoutes: Routes = [
+		{path: 'home', component: HomeCoponent },
+		{path: 'employees', component:EmployeeComponent },
+		{path: '',redirectTo, '/home',pathMatch: 'full'},
+		{path: '*', component: pageNotFoundComponent }
+	];
+Step 4) Specify where you wnat the routed component view template to be displayed using the <router-outlet> directive.(in app.component.html)
+Step 5) Create a navigation menu and tie the configured routes with menu using the routerLink directive.
+
+ng new Routing@Demo --routing to generate routing module 
+
+ng serve -o (Angular CLI runs webpack to build and bundle all javascript and css code)
+inline.bunlde.js - WebPack runtime. Required for WebPack to do it's job.
+main.bundle.js - All our application code that we write.
+polyfills.bundle.js - Browser Polyfills
+styles.bundles.js - Styles used by the application.
+vendor.bundle.js - Vendor files (Angular + any 3rd party vendor files)
+
+What is Bundling and why it is important for performance?
+	A typical real world angular code is in many small files
+	web browser have a limit on how many scripts or css files they can download simultaneously, because of the browser limitation
+	application may suffer from performance perspective, if it has many JS and CSS files to download.
+	Bundling can solve this problem by combining many small application and library files into a few bundles.
+
+Other performance techniques to improve angualr application performance
+	Ahead-of-Time (AOT) Compilation
+	Minification
+	Uglification
+	TreeShaking
+
+ng serve command build and serves the application from memory for a faseter development experience, this does not generate the 
+build artifact for deployement.
+ng build command builds the application artifact for deployment.
+
+ng serve --watch or ng serve -w (Run build when files changes by default this is true)
+ng serve -w false // to set the watch mode to false
+ng serve --live-reload or ng serve -lr // default to true, Whether to reload the page on change
+ng serve --port or ng serve -p // The port on which the server is running
+	ex -  ng serve --open -p 8288
+ng serve -extract-css or ng serve -ec (extract the CSS to css file instead of js bundles)
+ng build --prod  // for prod build by default, doen't produce source maps (it contains the file origin location that can be traced back
+ng build --prod -sm true //produces source maps for prod build also
+in prod build following features are available - 
+	Minification - trailing spaces are removed.
+	Uglification - the methos paramter names are shortened.
+	TresShaking - the unused components and methods are not compiled in the main build.js
+	Ahead of Time compilation - The builds are pre-compiled.
+
+By default below command use JIT compilation
+ng build
+bg serve
+
+ng prod //AOT is true by default
+
+// To enable the aot in ng build and ng serve command this will enable compile time error checking if there is any.
+ng build --aot
+ng serve --aot
+
+To turn off AOT for the product build, set --aot options to false
+ng build --prod --aot false
+
+ng build --prod --base-href /ePortal/ // base href sets to eProtal in index.html instead of single "/", but the name of the application that 
+					// has to be deployed in the IIS should have the same name.
+
+npm install source-map-explorer --save-dev // To install source map tool to inspect the javascript bundles,
+					//The source map files will get generated when we do ng build
+					//node_modules\.bin\source-map-explorer dist\vendor.bundle.js 
+					// to inspect the js file using sourcemap
+ng serve -aot
+ng build -prod --base-href /emp/ // To set the base href location to the emp folder
+prompt $$ // This command will hide the long project path in terminal window
+
+##To Add the Material to angular App
+npm install --save @angular/material @angular/cdk
+-Angular animation module
+npm install --save @angular/animations
