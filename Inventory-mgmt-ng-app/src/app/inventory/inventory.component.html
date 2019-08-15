@@ -1,0 +1,193 @@
+<br/>
+<section class="Upload">
+  <div class="container-12 bg-info rounded">
+  <div class="row upload-row-padding">
+        <div class="col-sm-4 container btn btn-lg btn-dark">
+            <input type="file" style="width:265px;text-align:left" (change)="changeListener($event)" #input />
+            <button type="button" class="btn-dark btn-lg upload" name="upload" (click)="Upload()" #fileInput>Upload</button>
+        </div>
+        <div class="col-sm-8 align-right">
+          <button type="button" class="btn-dark btn-lg btn-margin" (click)="GetUsersDevices()" name="UserDevices" value="Devices with Me">Devices with Me</button>
+          <button type="button" class="btn-dark btn-lg" (click)="GetAllDevices()" name="AllDevices" value="Get All Devivces">Get All Devivces</button>
+        </div>
+  </div>
+  </div>
+</section>
+  <br/>
+<div class="border border-info tbl-div-style">
+    <table mat-table id="tblInventory" class="table table-active table-hover">
+        <thead class="thead-light">
+            <tr class="text-nowrap">
+                <th>Sr. No.</th>
+                <th>Model Name/Description</th>
+                <th>Sl. No.</th>
+                <th>Quantity</th>
+                <th>Asset Tag</th>
+                <th>Workstation/Lab</th>
+                <th>Rack Number</th>
+                <th>Rail Number</th>
+                <th>User ID</th>
+                <th>Display Name</th>
+                <th>Location</th>
+                <th>Asset Type</th>
+                <th>Project</th>
+                <th>Invoice No.</th>
+                <th>Value As per Invoice</th>
+                <th>PO Number</th>
+                <th>Date</th>
+                <th style="min-width:160px">Action</th>
+            </tr>
+        </thead>
+        <tbody class="tbl-body-bgcolor">
+          <tr *ngFor="let inv of inventoryDetailsList;let id = index">
+            <td>{{inv.SrNo}}</td>
+            <td>
+              <span id="ModelName" [hidden]="inv.isEditable">{{inv.ModelName}}</span>
+              <input type="text" [(ngModel)]="inv.ModelName" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="SlNo" [hidden]="inv.isEditable">{{inv.SlNo}}</span>
+                <input type="text" [(ngModel)]="inv.SlNo" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="Quantity" [hidden]="inv.isEditable">{{inv.Quantity}}</span>
+                <input type="text" [(ngModel)]="inv.Quantity" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="AssetTag" [hidden]="inv.isEditable">{{inv.AssetTag}}</span>
+                <input type="text" [(ngModel)]="inv.AssetTag" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="WorkstationOrLab" [hidden]="inv.isEditable">{{inv.WorkstationOrLab}}</span>
+                <input type="text" [(ngModel)]="inv.WorkstationOrLab" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="RackNumber" [hidden]="inv.isEditable">{{inv.RackNumber}}</span>
+                <input type="text" [(ngModel)]="inv.RackNumber" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="RailNumber" [hidden]="inv.isEditable">{{inv.RailNumber}}</span>
+                <input type="text" [(ngModel)]="inv.RailNumber" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                {{inv.UserID}}
+            </td>
+            <td>
+                {{inv.DisplayName}}
+            </td>
+            <td>
+                <span id="Location" [hidden]="inv.isEditable">{{inv.Location}}</span>
+                <input type="text" [(ngModel)]="inv.Location" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="AssetType" [hidden]="inv.isEditable">{{inv.AssetType}}</span>
+                <input type="text" [(ngModel)]="inv.AssetType" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="Project" [hidden]="inv.isEditable">{{inv.Project}}</span>
+                <input type="text" [(ngModel)]="inv.Project" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="InvoiceNo" [hidden]="inv.isEditable">{{inv.InvoiceNo}}</span>
+                <input type="text" [(ngModel)]="inv.InvoiceNo" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="InvoiceValue" [hidden]="inv.isEditable">{{inv.InvoiceValue}}</span>
+                <input type="text" [(ngModel)]="inv.InvoiceValue" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="PoNumber" [hidden]="inv.isEditable">{{inv.PoNumber}}</span>
+                <input type="text" [(ngModel)]="inv.PoNumber" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <span id="Date" [hidden]="inv.isEditable">{{inv.Date}}</span>
+                <input type="text" [(ngModel)]="inv.Date" [hidden]="!inv.isEditable"/>
+            </td>
+            <td>
+                <a *ngIf="!inv.isEditable" (click)="inv.isEditable=!inv.isEditable;Edit()"  title="Edit"><img src="assets/images/edit.png"></a>
+                <a *ngIf="inv.isEditable" (click)="inv.isEditable=!inv.isEditable;Update()" title="Save"><img src="assets/images/save.png"></a>
+                | <a class="Remove" (click)="remove(id, inv.Id)" title="Remove"><img src="assets/images/remove.png"></a> |
+                <a class="ChangeUser" (click)="openModal(inv.SrNo,'userModal')" data-toggle="modal" title="Change User"><img src="assets/images/changeUser.png"></a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+     <button id="btnAddInventory" class="btn btn-dark text-center btnAddRow" (click)="AddRow()" type="button">Add Rows</button>
+     <button id="btnSaveInventory" class="btn btn-dark text-center btnSave" (click)="save()" type="button">Save</button>
+</div>
+
+<!-- <div class="backdrop" [ngStyle]="{'display':display}"></div> -->
+
+<div id='userModal' class='modal' tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title align-self-lg-start">Search User</h4>
+                <button type="button" (click)="closeModal()" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div id='myModalContent' class="modal-body">
+                <table style="width:500px;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input class="form-control align-self-stretch" placeholder="Search User" #searchUserVal id="txtSearchUser" type="text" value="" />
+                            </td>
+                            <td>
+                                <button id="btnSearchUser" (click)="searchUser(searchUserVal.value)" class="btn btn-primary align-content-lg-end" type="button">Search</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="usersDiv" class="border border-light" style="overflow-y:auto;height:300px;">
+                    <table style="height:255px;width:490px;margin-top:3px" id="tblUsersList" class="table-bordered table-hover table-active table-responsive-lg thead-dark table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th style="min-width:8px"></th>
+                                <th style="min-width:40px">User Id</th>
+                                <th style="min-width:100px">User Name</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbl-body-bgcolor">
+                                <tr *ngFor="let user of userDetailsList;let id = index">
+                                  <td>
+                                        <input type="radio" 
+                                        [value]="user.AccountId" 
+                                        (change)="onSelectionChange(user)"
+                                        name="radiogroup">
+                                  </td>
+                                  <td>
+                                        {{user.AccountId}}
+                                  </td>
+                                  <td>
+                                        {{user.DisplayName}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                        <tbody id="tblUsersListBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btnAssignUser" (click)="assignUser()" class="btn btn-primary button button4">Assign</button>
+                <button type="button" id="btnHideModal" (click)="closeModal()" class="btn btn-primary button button4">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id='DataSaveModal' class='modal' tabindex="-1" role="dialog" [ngStyle]="{'display':displayDataSaveModel}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent' class="modal-body alignHorizontal">
+                <h5>{{alertMessage}}
+                    <button type="button" id="btnHideModal" (click)="closeDataSaveModel()" class="btn button ">&times;</button>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+

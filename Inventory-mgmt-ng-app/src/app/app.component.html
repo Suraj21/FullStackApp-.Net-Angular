@@ -1,0 +1,25 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar  navbar-expand-sm bg-info navbar-light ">
+  <div class="navbar-header navbar-brand">
+          <a class="navbar-brand text-white" >Inventory Management App</a>
+  </div>
+  <ul class="nav navbar-nav navbar-brand" *ngIf="isUserLoggedIn">
+      <li class="nav-item active">
+          <a class="text-white" routerLink="inventory">Home</a>
+      </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <div *ngIf="isUserLoggedIn">
+      <label class="loggedInUserName">{{loggedInUserName}}</label>
+      <button type="button" name="Logout" (click)="Logout()" class="btn btn-info"  value="Logout">
+          <img src="assets/images/logout.png" />
+      </button>
+    </div>
+</ul>
+</nav>
+
+<div class="container-fluid">
+    <router-outlet></router-outlet> 
+</div>
+
+<div  *ngIf="isUserLoggedIn" class="footer-nav textAlignCenter bg-info">&copy;Siemens</div>

@@ -1,0 +1,51 @@
+.align-right { 
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-margin {
+    margin-right: 5px;
+}
+
+.tbl-body-bgcolor {
+    background: white;
+}
+
+.tbl-div-style {
+    height:625px;
+    min-height:320px;
+    max-height:720px;
+    overflow-x:auto;
+    overflow-y:scroll;
+}
+
+.upload-row-padding {
+    padding: 25px;
+}
+
+.backdrop{ 
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+}
+
+.btnAddRow {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:200px;
+}
+
+.btnSave {
+    margin-top: 10px;
+    width:200px;
+    float:right;
+}
+
+.alignHorizontal {
+    display: inline-flex;
+    margin-left: 130px
+}
