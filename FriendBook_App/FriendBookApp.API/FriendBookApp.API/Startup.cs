@@ -1,6 +1,8 @@
-﻿using FriendBookApp.API.Data;
+﻿using AutoMapper;
+using FriendBookApp.API.Data;
 using FriendBookApp.API.Data.Interfaces;
 using FriendBookApp.API.Data.Repository;
+using FriendBookApp.API.Data.SeedData;
 using FriendBookApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
@@ -31,10 +34,17 @@ namespace FriendBookApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).
+                AddJsonOptions(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
+
+            services.AddCors();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient<IValueRepository, ValueRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddCors();
+            services.AddScoped<IFriendRepository, FriendRepository>();
+            services.AddTransient<Seed>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -48,7 +58,7 @@ namespace FriendBookApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +80,7 @@ namespace FriendBookApp.API
                     });
                 });
             }
+            seeder.SeedUser();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

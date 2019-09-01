@@ -1,6 +1,7 @@
 ﻿using FriendBookApp.API.Data.Interfaces;
 using FriendBookApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace FriendBookApp.API.Data.Repository
             }
             catch (System.Exception ex)
             {
-
+                Console.Write(ex.Message);
                 throw;
             }
         }

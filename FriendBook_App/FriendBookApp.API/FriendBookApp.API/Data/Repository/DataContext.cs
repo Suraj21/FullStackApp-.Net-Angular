@@ -7,6 +7,7 @@ namespace FriendBookApp.API.Data
     {
         public DbSet<Value> Value { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {
         }
