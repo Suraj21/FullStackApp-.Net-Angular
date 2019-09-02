@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FriendBookApp.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

@@ -4,3 +4,4 @@ Angular JWT - @auth0/angular-jwt - for decoding token
 NGX BootStrap
 alertify.js
 npm install bootswatch@4.3.1 - this version should be same as the installed bootstrap version
+npm install ngx-gallery --save
