@@ -2,11 +2,13 @@
 using FriendBookApp.API.Data.Interfaces;
 using FriendBookApp.API.Data.Repository;
 using FriendBookApp.API.Dto;
+using FriendBookApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace FriendBookApp.API.Controllers
@@ -40,5 +42,25 @@ namespace FriendBookApp.API.Controllers
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        {
+            // a way to check whether the user is the current user who token is being passed
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await friendRepository.GetUser(id);
+
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if (await friendRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on Save");
+        }
+
     }
 }

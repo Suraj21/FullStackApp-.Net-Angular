@@ -80,7 +80,7 @@ namespace FriendBookApp.API
                     });
                 });
             }
-            seeder.SeedUser();
+            //seeder.SeedUser();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

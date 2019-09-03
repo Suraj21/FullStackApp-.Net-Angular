@@ -37,6 +37,7 @@ namespace FriendBookApp.API.Helpers
                 }); ;
 
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<UserForUpdateDto, Users>();
         }
     }
 }

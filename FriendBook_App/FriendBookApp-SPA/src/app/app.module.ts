@@ -1,3 +1,4 @@
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberDetailsResolver } from './_resolver/member-detail.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
@@ -25,6 +26,8 @@ import { appRoutes } from './routes';
 import { UserService } from './_services/user.service';
 import { MemberListResolver } from './_resolver/member-list.resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { MemberEditResolver } from './_resolver/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 // const appRoutes: Routes = [
 //   {path : 'home', component : HomeComponent},
@@ -45,7 +48,8 @@ export function tokenGetter() {
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -71,7 +75,9 @@ export function tokenGetter() {
       AuthGuard,
       UserService,
       MemberDetailsResolver,
-      MemberListResolver
+      MemberListResolver,
+      MemberEditResolver,
+      PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent
