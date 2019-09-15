@@ -14,5 +14,7 @@ namespace FriendBookApp.API.Data.Interfaces
         Task<bool> SaveAll();
         Task<IEnumerable<Users>> GetUsers();
         Task<Users> GetUser(int id);
+
+        Task<Photo> GetPhoto(int id);
     }
 }

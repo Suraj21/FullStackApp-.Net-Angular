@@ -40,6 +40,7 @@ namespace FriendBookApp.API
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
 
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient<IValueRepository, ValueRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
