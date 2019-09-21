@@ -17,7 +17,7 @@ namespace FriendBookApp.API.Data.Repository
 
         public async Task<Users> Login(string userName, string password)
         {
-            var user = await DataContext.Users.FirstOrDefaultAsync(x => x.Username == userName);
+            var user = await DataContext.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Username == userName);
 
             if (user == null) return null;
 

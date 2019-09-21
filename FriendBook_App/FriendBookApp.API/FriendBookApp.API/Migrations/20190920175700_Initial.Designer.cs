@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FriendBookApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190904033406_AddedPublicId")]
-    partial class AddedPublicId
+    [Migration("20190920175700_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,9 +37,7 @@ namespace FriendBookApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<int?>("UsersId");
+                    b.Property<int>("UsersId");
 
                     b.HasKey("Id");
 
@@ -100,7 +98,8 @@ namespace FriendBookApp.API.Migrations
                 {
                     b.HasOne("FriendBookApp.API.Models.Users", "Users")
                         .WithMany("Photos")
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

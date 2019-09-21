@@ -16,5 +16,6 @@ namespace FriendBookApp.API.Data.Interfaces
         Task<Users> GetUser(int id);
 
         Task<Photo> GetPhoto(int id);
+        Task<Photo> GetMainPhotoFromUser(int userId);
     }
 }

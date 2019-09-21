@@ -11,6 +11,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+
 
 // const appRoutes: Routes = [
 //   {path : 'home', component : HomeComponent},
@@ -59,6 +61,7 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       NgxGalleryModule,
+      FileUploadModule,
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),

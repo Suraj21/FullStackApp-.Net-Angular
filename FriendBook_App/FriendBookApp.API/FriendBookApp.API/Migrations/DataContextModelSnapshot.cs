@@ -35,9 +35,7 @@ namespace FriendBookApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<int?>("UsersId");
+                    b.Property<int>("UsersId");
 
                     b.HasKey("Id");
 
@@ -98,7 +96,8 @@ namespace FriendBookApp.API.Migrations
                 {
                     b.HasOne("FriendBookApp.API.Models.Users", "Users")
                         .WithMany("Photos")
-                        .HasForeignKey("UsersId");
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

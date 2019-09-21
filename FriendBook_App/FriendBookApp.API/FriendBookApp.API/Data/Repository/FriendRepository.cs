@@ -25,6 +25,11 @@ namespace FriendBookApp.API.Data.Repository
             dataContext.Remove(entity);
         }
 
+        public async Task<Photo> GetMainPhotoFromUser(int userId)
+        {
+            return await dataContext.Photos.Where(u => u.UsersId == userId).FirstOrDefaultAsync(p => p.IsMain);
+        }
+
         public async Task<Photo> GetPhoto(int id)
         {
             var photo = await dataContext.Photos.FirstOrDefaultAsync(p => p.Id == id);

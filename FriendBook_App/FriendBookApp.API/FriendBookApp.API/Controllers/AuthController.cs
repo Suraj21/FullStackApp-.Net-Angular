@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FriendBookApp.API.Data.Interfaces;
 using FriendBookApp.API.Dto;
 using FriendBookApp.API.Models;
@@ -18,11 +19,13 @@ namespace FriendBookApp.API.Controllers
     {
         private IAuthRepository _authRepository;
         private IConfiguration _config;
+        public IMapper _mapper { get; }
 
-        public AuthController(IAuthRepository authRepository, IConfiguration configuration)
+        public AuthController(IAuthRepository authRepository, IConfiguration configuration, IMapper mapper)
         {
             _authRepository = authRepository;
             _config = configuration;
+            _mapper = mapper;
         }
 
         [HttpPost("Register")]
@@ -68,10 +71,11 @@ namespace FriendBookApp.API.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user
             });
         }
     }
